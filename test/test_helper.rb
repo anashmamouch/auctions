@@ -8,3 +8,16 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+DatabaseCleaner.strategy = :truncation
+
+class MiniTest::Test
+  def setup
+    DatabaseCleaner.start
+  end
+
+  def teardown
+    DatabaseCleaner.clean
+    Timecop.return
+  end
+end
